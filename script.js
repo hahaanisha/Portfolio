@@ -1,38 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const typewriterElement = document.querySelector(".typewriter");
-  const words = [
-    "Student",
-    "Full Stack Developer",
-    "Designer",
-    "ML Enthusiast",
-  ];
-  let wordIndex = 0;
-  let charIndex = 0;
-  let currentWord = "";
-  let isDeleting = false;
-
-  function type() {
-    currentWord = words[wordIndex];
-    if (isDeleting) {
-      charIndex--;
-    } else {
-      charIndex++;
-    }
-
-    typewriterElement.textContent = currentWord.substring(0, charIndex);
-
-    if (!isDeleting && charIndex === currentWord.length) {
-      setTimeout(() => (isDeleting = true), 1000);
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
-    }
-
-    setTimeout(type, isDeleting ? 50 : 100);
-  }
-
-  type();
+  let t = document.querySelector(".typewriter"),
+    e = ["Student", "Full Stack Developer", "Designer", "ML Enthusiast"],
+    n = 0,
+    $ = 0,
+    r = "",
+    i = !1;
+  !(function l() {
+    (r = e[n]),
+      i ? $-- : $++,
+      (t.textContent = r.substring(0, $)),
+      i || $ !== r.length
+        ? i && 0 === $ && ((i = !1), (n = (n + 1) % e.length))
+        : setTimeout(() => (i = !0), 1e3),
+      setTimeout(l, i ? 50 : 100);
+  })();
 });
-
-
-
